@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.6.1 -->
+<title>pedestrian detector | fastpages</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="pedestrian detector" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<meta property="og:description" content="An easy to use blogging platform with support for Jupyter Notebooks." />
+<link rel="canonical" href="https://anders447.github.io/sample-ds-blog-anders/2021/05/09/Pedestrian_detector.html" />
+<meta property="og:url" content="https://anders447.github.io/sample-ds-blog-anders/2021/05/09/Pedestrian_detector.html" />
+<meta property="og:site_name" content="fastpages" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2021-05-09T00:00:00-05:00" />
+<script type="application/ld+json">
+{"url":"https://anders447.github.io/sample-ds-blog-anders/2021/05/09/Pedestrian_detector.html","@type":"BlogPosting","headline":"pedestrian detector","dateModified":"2021-05-09T00:00:00-05:00","datePublished":"2021-05-09T00:00:00-05:00","mainEntityOfPage":{"@type":"WebPage","@id":"https://anders447.github.io/sample-ds-blog-anders/2021/05/09/Pedestrian_detector.html"},"description":"An easy to use blogging platform with support for Jupyter Notebooks.","@context":"https://schema.org"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/sample-ds-blog-anders/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anders447.github.io/sample-ds-blog-anders/feed.xml" title="fastpages" /><link rel="shortcut icon" type="image/x-icon" href="/sample-ds-blog-anders/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/sample-ds-blog-anders/">fastpages</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/sample-ds-blog-anders/about/">About Me</a><a class="page-link" href="/sample-ds-blog-anders/search/">Search</a><a class="page-link" href="/sample-ds-blog-anders/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">pedestrian detector</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2021-05-09T00:00:00-05:00" itemprop="datePublished">
+        May 9, 2021
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      7 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-wrap flex-justify-end">
+          <div class="px-2">
+
+    <a href="https://github.com/anders447/sample-ds-blog-anders/tree/master/_notebooks/2021-05-09-Pedestrian_detector.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/sample-ds-blog-anders/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/anders447/sample-ds-blog-anders/master?filepath=_notebooks%2F2021-05-09-Pedestrian_detector.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/sample-ds-blog-anders/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/anders447/sample-ds-blog-anders/blob/master/_notebooks/2021-05-09-Pedestrian_detector.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/sample-ds-blog-anders/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2021-05-09-Pedestrian_detector.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://colab.research.google.com/github/anders447/sample-ds-blog-anders/blob/master/_notebooks/2021-05-09-Pedestrian_detector.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab" /></a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://pytorch.org/tutorials/intermediate/torchvision_tutorial.html">https://pytorch.org/tutorials/intermediate/torchvision_tutorial.html</a></p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">git</span><span class="o">+</span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">gautamchitnis</span><span class="o">/</span><span class="n">cocoapi</span><span class="o">.</span><span class="n">git</span><span class="nd">@cocodataset</span><span class="o">-</span><span class="n">master</span><span class="c1">#subdirectory=PythonAPI</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Collecting git+https://github.com/gautamchitnis/cocoapi.git@cocodataset-master#subdirectory=PythonAPI
+  Cloning https://github.com/gautamchitnis/cocoapi.git (to revision cocodataset-master) to /tmp/pip-req-build-0v7f304q
+  Running command git clone -q https://github.com/gautamchitnis/cocoapi.git /tmp/pip-req-build-0v7f304q
+  Running command git checkout -b cocodataset-master --track origin/cocodataset-master
+  Switched to a new branch &#39;cocodataset-master&#39;
+  Branch &#39;cocodataset-master&#39; set up to track remote branch &#39;cocodataset-master&#39; from &#39;origin&#39;.
+Requirement already satisfied (use --upgrade to upgrade): pycocotools==2.0 from git+https://github.com/gautamchitnis/cocoapi.git@cocodataset-master#subdirectory=PythonAPI in /usr/local/lib/python3.7/dist-packages
+Building wheels for collected packages: pycocotools
+  Building wheel for pycocotools (setup.py) ... done
+  Created wheel for pycocotools: filename=pycocotools-2.0-cp37-cp37m-linux_x86_64.whl size=264249 sha256=17c35a7c36ad6a8b630d42fbc47971ad4148e14463cd2af16c4acfa13a550e51
+  Stored in directory: /tmp/pip-ephem-wheel-cache-vg75ykd3/wheels/49/ca/2b/1b99c52bb9e7a9804cd60d66243ec70c9f15977795793d2646
+Successfully built pycocotools
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">google.colab</span> <span class="kn">import</span> <span class="n">drive</span>
+<span class="n">drive</span><span class="o">.</span><span class="n">mount</span><span class="p">(</span><span class="s1">&#39;/content/drive&#39;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Drive already mounted at /content/drive; to attempt to forcibly remount, call drive.mount(&#34;/content/drive&#34;, force_remount=True).
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">zipfile</span>
+<span class="k">with</span> <span class="n">zipfile</span><span class="o">.</span><span class="n">ZipFile</span><span class="p">(</span><span class="s2">&quot;/content/drive/MyDrive/PennFudanPed.zip&quot;</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">zip_ref</span><span class="p">:</span>
+    <span class="n">zip_ref</span><span class="o">.</span><span class="n">extractall</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;/content/drive/MyDrive/detection&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">utils</span>
+<span class="kn">import</span> <span class="nn">transforms</span>
+<span class="kn">import</span> <span class="nn">engine</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">torch</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span>
+
+
+<span class="k">class</span> <span class="nc">PennFudanDataset</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">,</span> <span class="n">transforms</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">root</span> <span class="o">=</span> <span class="n">root</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span> <span class="o">=</span> <span class="n">transforms</span>
+        <span class="c1"># load all image files, sorting them to</span>
+        <span class="c1"># ensure that they are aligned</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">imgs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;PNGImages&quot;</span><span class="p">))))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">masks</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;PedMasks&quot;</span><span class="p">))))</span>
+
+    <span class="k">def</span> <span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idx</span><span class="p">):</span>
+        <span class="c1"># load images and masks</span>
+        <span class="n">img_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;PNGImages&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">imgs</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+        <span class="n">mask_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">root</span><span class="p">,</span> <span class="s2">&quot;PedMasks&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">masks</span><span class="p">[</span><span class="n">idx</span><span class="p">])</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span><span class="o">.</span><span class="n">convert</span><span class="p">(</span><span class="s2">&quot;RGB&quot;</span><span class="p">)</span>
+        <span class="c1"># note that we haven&#39;t converted the mask to RGB,</span>
+        <span class="c1"># because each color corresponds to a different instance</span>
+        <span class="c1"># with 0 being background</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">mask_path</span><span class="p">)</span>
+        <span class="c1"># convert the PIL Image into a numpy array</span>
+        <span class="n">mask</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+        <span class="c1"># instances are encoded as different colors</span>
+        <span class="n">obj_ids</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">mask</span><span class="p">)</span>
+        <span class="c1"># first id is the background, so remove it</span>
+        <span class="n">obj_ids</span> <span class="o">=</span> <span class="n">obj_ids</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="c1"># split the color-encoded mask into a set</span>
+        <span class="c1"># of binary masks</span>
+        <span class="n">masks</span> <span class="o">=</span> <span class="n">mask</span> <span class="o">==</span> <span class="n">obj_ids</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span>
+
+        <span class="c1"># get bounding box coordinates for each mask</span>
+        <span class="n">num_objs</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">obj_ids</span><span class="p">)</span>
+        <span class="n">boxes</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_objs</span><span class="p">):</span>
+            <span class="n">pos</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">masks</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">xmin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">xmax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">ymin</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">ymax</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">pos</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+            <span class="n">boxes</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">xmin</span><span class="p">,</span> <span class="n">ymin</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">])</span>
+
+        <span class="c1"># convert everything into a torch.Tensor</span>
+        <span class="n">boxes</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">boxes</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span>
+        <span class="c1"># there is only one class</span>
+        <span class="n">labels</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">num_objs</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+        <span class="n">masks</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">as_tensor</span><span class="p">(</span><span class="n">masks</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">uint8</span><span class="p">)</span>
+
+        <span class="n">image_id</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">tensor</span><span class="p">([</span><span class="n">idx</span><span class="p">])</span>
+        <span class="n">area</span> <span class="o">=</span> <span class="p">(</span><span class="n">boxes</span><span class="p">[:,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">boxes</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">])</span> <span class="o">*</span> <span class="p">(</span><span class="n">boxes</span><span class="p">[:,</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">boxes</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">])</span>
+        <span class="c1"># suppose all instances are not crowd</span>
+        <span class="n">iscrowd</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">num_objs</span><span class="p">,),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">torch</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+        <span class="n">target</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="n">target</span><span class="p">[</span><span class="s2">&quot;boxes&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">boxes</span>
+        <span class="n">target</span><span class="p">[</span><span class="s2">&quot;labels&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">labels</span>
+        <span class="n">target</span><span class="p">[</span><span class="s2">&quot;masks&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">masks</span>
+        <span class="n">target</span><span class="p">[</span><span class="s2">&quot;image_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">image_id</span>
+        <span class="n">target</span><span class="p">[</span><span class="s2">&quot;area&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">area</span>
+        <span class="n">target</span><span class="p">[</span><span class="s2">&quot;iscrowd&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">iscrowd</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">img</span><span class="p">,</span> <span class="n">target</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transforms</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">img</span><span class="p">,</span> <span class="n">target</span>
+
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">imgs</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">from</span> <span class="nn">torchvision.models.detection.faster_rcnn</span> <span class="kn">import</span> <span class="n">FastRCNNPredictor</span>
+
+<span class="c1"># load a model pre-trained pre-trained on COCO</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">detection</span><span class="o">.</span><span class="n">fasterrcnn_resnet50_fpn</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># replace the classifier with a new one, that has</span>
+<span class="c1"># num_classes which is user-defined</span>
+<span class="n">num_classes</span> <span class="o">=</span> <span class="mi">2</span>  <span class="c1"># 1 class (person) + background</span>
+<span class="c1"># get number of input features for the classifier</span>
+<span class="n">in_features</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">roi_heads</span><span class="o">.</span><span class="n">box_predictor</span><span class="o">.</span><span class="n">cls_score</span><span class="o">.</span><span class="n">in_features</span>
+<span class="c1"># replace the pre-trained head with a new one</span>
+<span class="n">model</span><span class="o">.</span><span class="n">roi_heads</span><span class="o">.</span><span class="n">box_predictor</span> <span class="o">=</span> <span class="n">FastRCNNPredictor</span><span class="p">(</span><span class="n">in_features</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">from</span> <span class="nn">torchvision.models.detection</span> <span class="kn">import</span> <span class="n">FasterRCNN</span>
+<span class="kn">from</span> <span class="nn">torchvision.models.detection.rpn</span> <span class="kn">import</span> <span class="n">AnchorGenerator</span>
+
+<span class="c1"># load a pre-trained model for classification and return</span>
+<span class="c1"># only the features</span>
+<span class="n">backbone</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">mobilenet_v2</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">features</span>
+<span class="c1"># FasterRCNN needs to know the number of</span>
+<span class="c1"># output channels in a backbone. For mobilenet_v2, it&#39;s 1280</span>
+<span class="c1"># so we need to add it here</span>
+<span class="n">backbone</span><span class="o">.</span><span class="n">out_channels</span> <span class="o">=</span> <span class="mi">1280</span>
+
+<span class="c1"># let&#39;s make the RPN generate 5 x 3 anchors per spatial</span>
+<span class="c1"># location, with 5 different sizes and 3 different aspect</span>
+<span class="c1"># ratios. We have a Tuple[Tuple[int]] because each feature</span>
+<span class="c1"># map could potentially have different sizes and</span>
+<span class="c1"># aspect ratios</span>
+<span class="n">anchor_generator</span> <span class="o">=</span> <span class="n">AnchorGenerator</span><span class="p">(</span><span class="n">sizes</span><span class="o">=</span><span class="p">((</span><span class="mi">32</span><span class="p">,</span> <span class="mi">64</span><span class="p">,</span> <span class="mi">128</span><span class="p">,</span> <span class="mi">256</span><span class="p">,</span> <span class="mi">512</span><span class="p">),),</span>
+                                   <span class="n">aspect_ratios</span><span class="o">=</span><span class="p">((</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">),))</span>
+
+<span class="c1"># let&#39;s define what are the feature maps that we will</span>
+<span class="c1"># use to perform the region of interest cropping, as well as</span>
+<span class="c1"># the size of the crop after rescaling.</span>
+<span class="c1"># if your backbone returns a Tensor, featmap_names is expected to</span>
+<span class="c1"># be [0]. More generally, the backbone should return an</span>
+<span class="c1"># OrderedDict[Tensor], and in featmap_names you can choose which</span>
+<span class="c1"># feature maps to use.</span>
+<span class="n">roi_pooler</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">ops</span><span class="o">.</span><span class="n">MultiScaleRoIAlign</span><span class="p">(</span><span class="n">featmap_names</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;0&#39;</span><span class="p">],</span>
+                                                <span class="n">output_size</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+                                                <span class="n">sampling_ratio</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># put the pieces together inside a FasterRCNN model</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">FasterRCNN</span><span class="p">(</span><span class="n">backbone</span><span class="p">,</span>
+                   <span class="n">num_classes</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                   <span class="n">rpn_anchor_generator</span><span class="o">=</span><span class="n">anchor_generator</span><span class="p">,</span>
+                   <span class="n">box_roi_pool</span><span class="o">=</span><span class="n">roi_pooler</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">torchvision</span>
+<span class="kn">from</span> <span class="nn">torchvision.models.detection.faster_rcnn</span> <span class="kn">import</span> <span class="n">FastRCNNPredictor</span>
+<span class="kn">from</span> <span class="nn">torchvision.models.detection.mask_rcnn</span> <span class="kn">import</span> <span class="n">MaskRCNNPredictor</span>
+
+
+<span class="k">def</span> <span class="nf">get_model_instance_segmentation</span><span class="p">(</span><span class="n">num_classes</span><span class="p">):</span>
+    <span class="c1"># load an instance segmentation model pre-trained pre-trained on COCO</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">detection</span><span class="o">.</span><span class="n">maskrcnn_resnet50_fpn</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># get number of input features for the classifier</span>
+    <span class="n">in_features</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">roi_heads</span><span class="o">.</span><span class="n">box_predictor</span><span class="o">.</span><span class="n">cls_score</span><span class="o">.</span><span class="n">in_features</span>
+    <span class="c1"># replace the pre-trained head with a new one</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">roi_heads</span><span class="o">.</span><span class="n">box_predictor</span> <span class="o">=</span> <span class="n">FastRCNNPredictor</span><span class="p">(</span><span class="n">in_features</span><span class="p">,</span> <span class="n">num_classes</span><span class="p">)</span>
+
+    <span class="c1"># now get the number of input features for the mask classifier</span>
+    <span class="n">in_features_mask</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">roi_heads</span><span class="o">.</span><span class="n">mask_predictor</span><span class="o">.</span><span class="n">conv5_mask</span><span class="o">.</span><span class="n">in_channels</span>
+    <span class="n">hidden_layer</span> <span class="o">=</span> <span class="mi">256</span>
+    <span class="c1"># and replace the mask predictor with a new one</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">roi_heads</span><span class="o">.</span><span class="n">mask_predictor</span> <span class="o">=</span> <span class="n">MaskRCNNPredictor</span><span class="p">(</span><span class="n">in_features_mask</span><span class="p">,</span>
+                                                       <span class="n">hidden_layer</span><span class="p">,</span>
+                                                       <span class="n">num_classes</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">model</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">transforms</span> <span class="k">as</span> <span class="nn">T</span>
+
+<span class="k">def</span> <span class="nf">get_transform</span><span class="p">(</span><span class="n">train</span><span class="p">):</span>
+    <span class="n">transforms</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">transforms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">ToTensor</span><span class="p">())</span>
+    <span class="k">if</span> <span class="n">train</span><span class="p">:</span>
+        <span class="n">transforms</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">T</span><span class="o">.</span><span class="n">RandomHorizontalFlip</span><span class="p">(</span><span class="mf">0.5</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">T</span><span class="o">.</span><span class="n">Compose</span><span class="p">(</span><span class="n">transforms</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">torchvision</span><span class="o">.</span><span class="n">models</span><span class="o">.</span><span class="n">detection</span><span class="o">.</span><span class="n">fasterrcnn_resnet50_fpn</span><span class="p">(</span><span class="n">pretrained</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">PennFudanDataset</span><span class="p">(</span><span class="s1">&#39;PennFudanPed&#39;</span><span class="p">,</span> <span class="n">get_transform</span><span class="p">(</span><span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="n">data_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span>
+ <span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+ <span class="n">collate_fn</span><span class="o">=</span><span class="n">utils</span><span class="o">.</span><span class="n">collate_fn</span><span class="p">)</span>
+<span class="c1"># For Training</span>
+<span class="n">images</span><span class="p">,</span><span class="n">targets</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">data_loader</span><span class="p">))</span>
+<span class="n">images</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">image</span> <span class="k">for</span> <span class="n">image</span> <span class="ow">in</span> <span class="n">images</span><span class="p">)</span>
+<span class="n">targets</span> <span class="o">=</span> <span class="p">[{</span><span class="n">k</span><span class="p">:</span> <span class="n">v</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">targets</span><span class="p">]</span>
+<span class="n">output</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">images</span><span class="p">,</span><span class="n">targets</span><span class="p">)</span>   <span class="c1"># Returns losses and detections</span>
+<span class="c1"># For inference</span>
+<span class="n">model</span><span class="o">.</span><span class="n">eval</span><span class="p">()</span>
+<span class="n">x</span> <span class="o">=</span> <span class="p">[</span><span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">300</span><span class="p">,</span> <span class="mi">400</span><span class="p">),</span> <span class="n">torch</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">500</span><span class="p">,</span> <span class="mi">400</span><span class="p">)]</span>
+<span class="n">predictions</span> <span class="o">=</span> <span class="n">model</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>           <span class="c1"># Returns predictions</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/usr/local/lib/python3.7/dist-packages/torch/utils/data/dataloader.py:477: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  cpuset_checked))
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">engine</span> <span class="kn">import</span> <span class="n">train_one_epoch</span><span class="p">,</span> <span class="n">evaluate</span>
+<span class="kn">import</span> <span class="nn">utils</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
+    <span class="c1"># train on the GPU or on the CPU, if a GPU is not available</span>
+    <span class="n">device</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cuda&#39;</span><span class="p">)</span> <span class="k">if</span> <span class="n">torch</span><span class="o">.</span><span class="n">cuda</span><span class="o">.</span><span class="n">is_available</span><span class="p">()</span> <span class="k">else</span> <span class="n">torch</span><span class="o">.</span><span class="n">device</span><span class="p">(</span><span class="s1">&#39;cpu&#39;</span><span class="p">)</span>
+
+    <span class="c1"># our dataset has two classes only - background and person</span>
+    <span class="n">num_classes</span> <span class="o">=</span> <span class="mi">2</span>
+    <span class="c1"># use our dataset and defined transformations</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">PennFudanDataset</span><span class="p">(</span><span class="s1">&#39;PennFudanPed&#39;</span><span class="p">,</span> <span class="n">get_transform</span><span class="p">(</span><span class="n">train</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">dataset_test</span> <span class="o">=</span> <span class="n">PennFudanDataset</span><span class="p">(</span><span class="s1">&#39;PennFudanPed&#39;</span><span class="p">,</span> <span class="n">get_transform</span><span class="p">(</span><span class="n">train</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+    <span class="c1"># split the dataset in train and test set</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">randperm</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">))</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+    <span class="n">dataset</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Subset</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">indices</span><span class="p">[:</span><span class="o">-</span><span class="mi">50</span><span class="p">])</span>
+    <span class="n">dataset_test</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">Subset</span><span class="p">(</span><span class="n">dataset_test</span><span class="p">,</span> <span class="n">indices</span><span class="p">[</span><span class="o">-</span><span class="mi">50</span><span class="p">:])</span>
+
+    <span class="c1"># define training and validation data loaders</span>
+    <span class="n">data_loader</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span>
+        <span class="n">dataset</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">collate_fn</span><span class="o">=</span><span class="n">utils</span><span class="o">.</span><span class="n">collate_fn</span><span class="p">)</span>
+
+    <span class="n">data_loader_test</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">DataLoader</span><span class="p">(</span>
+        <span class="n">dataset_test</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">num_workers</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+        <span class="n">collate_fn</span><span class="o">=</span><span class="n">utils</span><span class="o">.</span><span class="n">collate_fn</span><span class="p">)</span>
+
+    <span class="c1"># get the model using our helper function</span>
+    <span class="n">model</span> <span class="o">=</span> <span class="n">get_model_instance_segmentation</span><span class="p">(</span><span class="n">num_classes</span><span class="p">)</span>
+
+    <span class="c1"># move model to the right device</span>
+    <span class="n">model</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="n">device</span><span class="p">)</span>
+
+    <span class="c1"># construct an optimizer</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">parameters</span><span class="p">()</span> <span class="k">if</span> <span class="n">p</span><span class="o">.</span><span class="n">requires_grad</span><span class="p">]</span>
+    <span class="n">optimizer</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">SGD</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">lr</span><span class="o">=</span><span class="mf">0.005</span><span class="p">,</span>
+                                <span class="n">momentum</span><span class="o">=</span><span class="mf">0.9</span><span class="p">,</span> <span class="n">weight_decay</span><span class="o">=</span><span class="mf">0.0005</span><span class="p">)</span>
+    <span class="c1"># and a learning rate scheduler</span>
+    <span class="n">lr_scheduler</span> <span class="o">=</span> <span class="n">torch</span><span class="o">.</span><span class="n">optim</span><span class="o">.</span><span class="n">lr_scheduler</span><span class="o">.</span><span class="n">StepLR</span><span class="p">(</span><span class="n">optimizer</span><span class="p">,</span>
+                                                   <span class="n">step_size</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                                                   <span class="n">gamma</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+
+    <span class="c1"># let&#39;s train it for 10 epochs</span>
+    <span class="n">num_epochs</span> <span class="o">=</span> <span class="mi">10</span>
+
+    <span class="k">for</span> <span class="n">epoch</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_epochs</span><span class="p">):</span>
+        <span class="c1"># train for one epoch, printing every 10 iterations</span>
+        <span class="n">train_one_epoch</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">optimizer</span><span class="p">,</span> <span class="n">data_loader</span><span class="p">,</span> <span class="n">device</span><span class="p">,</span> <span class="n">epoch</span><span class="p">,</span> <span class="n">print_freq</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+        <span class="c1"># update the learning rate</span>
+        <span class="n">lr_scheduler</span><span class="o">.</span><span class="n">step</span><span class="p">()</span>
+        <span class="c1"># evaluate on the test dataset</span>
+        <span class="n">evaluate</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">data_loader_test</span><span class="p">,</span> <span class="n">device</span><span class="o">=</span><span class="n">device</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;That&#39;s it!&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">main</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>/usr/local/lib/python3.7/dist-packages/torch/utils/data/dataloader.py:477: UserWarning: This DataLoader will create 4 worker processes in total. Our suggested max number of worker in current system is 2, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  cpuset_checked))
+Downloading: &#34;https://download.pytorch.org/models/maskrcnn_resnet50_fpn_coco-bf2d0c1e.pth&#34; to /root/.cache/torch/hub/checkpoints/maskrcnn_resnet50_fpn_coco-bf2d0c1e.pth
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+Epoch: [0]  [ 0/60]  eta: 0:50:23  lr: 0.000090  loss: 4.3564 (4.3564)  loss_classifier: 0.7056 (0.7056)  loss_box_reg: 0.3926 (0.3926)  loss_mask: 3.1841 (3.1841)  loss_objectness: 0.0605 (0.0605)  loss_rpn_box_reg: 0.0136 (0.0136)  time: 50.3886  data: 0.4679
+Epoch: [0]  [10/60]  eta: 0:35:49  lr: 0.000936  loss: 1.5900 (2.3714)  loss_classifier: 0.4546 (0.4669)  loss_box_reg: 0.2550 (0.2915)  loss_mask: 0.7683 (1.5655)  loss_objectness: 0.0405 (0.0412)  loss_rpn_box_reg: 0.0028 (0.0064)  time: 42.9868  data: 0.0485
+Epoch: [0]  [20/60]  eta: 0:29:25  lr: 0.001783  loss: 1.0068 (1.6108)  loss_classifier: 0.2335 (0.3285)  loss_box_reg: 0.2550 (0.2949)  loss_mask: 0.4494 (0.9535)  loss_objectness: 0.0213 (0.0283)  loss_rpn_box_reg: 0.0032 (0.0056)  time: 43.8188  data: 0.0074
+Epoch: [0]  [30/60]  eta: 0:22:08  lr: 0.002629  loss: 0.5893 (1.2825)  loss_classifier: 0.1033 (0.2525)  loss_box_reg: 0.2704 (0.2890)  loss_mask: 0.2122 (0.7117)  loss_objectness: 0.0126 (0.0229)  loss_rpn_box_reg: 0.0063 (0.0064)  time: 44.9881  data: 0.0088
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">KeyboardInterrupt</span>                         Traceback (most recent call last)
+<span class="ansi-green-fg">&lt;ipython-input-37-263240bbee7e&gt;</span> in <span class="ansi-cyan-fg">&lt;module&gt;</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-fg">----&gt; 1</span><span class="ansi-red-fg"> </span>main<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">&lt;ipython-input-36-66e4964d4996&gt;</span> in <span class="ansi-cyan-fg">main</span><span class="ansi-blue-fg">()</span>
+<span class="ansi-green-intense-fg ansi-bold">     47</span>     <span class="ansi-green-fg">for</span> epoch <span class="ansi-green-fg">in</span> range<span class="ansi-blue-fg">(</span>num_epochs<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+<span class="ansi-green-intense-fg ansi-bold">     48</span>         <span class="ansi-red-fg"># train for one epoch, printing every 10 iterations</span>
+<span class="ansi-green-fg">---&gt; 49</span><span class="ansi-red-fg">         </span>train_one_epoch<span class="ansi-blue-fg">(</span>model<span class="ansi-blue-fg">,</span> optimizer<span class="ansi-blue-fg">,</span> data_loader<span class="ansi-blue-fg">,</span> device<span class="ansi-blue-fg">,</span> epoch<span class="ansi-blue-fg">,</span> print_freq<span class="ansi-blue-fg">=</span><span class="ansi-cyan-fg">10</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     50</span>         <span class="ansi-red-fg"># update the learning rate</span>
+<span class="ansi-green-intense-fg ansi-bold">     51</span>         lr_scheduler<span class="ansi-blue-fg">.</span>step<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+
+<span class="ansi-green-fg">/content/drive/MyDrive/detection/engine.py</span> in <span class="ansi-cyan-fg">train_one_epoch</span><span class="ansi-blue-fg">(model, optimizer, data_loader, device, epoch, print_freq)</span>
+<span class="ansi-green-intense-fg ansi-bold">     44</span> 
+<span class="ansi-green-intense-fg ansi-bold">     45</span>         optimizer<span class="ansi-blue-fg">.</span>zero_grad<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-fg">---&gt; 46</span><span class="ansi-red-fg">         </span>losses<span class="ansi-blue-fg">.</span>backward<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     47</span>         optimizer<span class="ansi-blue-fg">.</span>step<span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">     48</span> 
+
+<span class="ansi-green-fg">/usr/local/lib/python3.7/dist-packages/torch/tensor.py</span> in <span class="ansi-cyan-fg">backward</span><span class="ansi-blue-fg">(self, gradient, retain_graph, create_graph, inputs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    243</span>                 create_graph<span class="ansi-blue-fg">=</span>create_graph<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-intense-fg ansi-bold">    244</span>                 inputs=inputs)
+<span class="ansi-green-fg">--&gt; 245</span><span class="ansi-red-fg">         </span>torch<span class="ansi-blue-fg">.</span>autograd<span class="ansi-blue-fg">.</span>backward<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> gradient<span class="ansi-blue-fg">,</span> retain_graph<span class="ansi-blue-fg">,</span> create_graph<span class="ansi-blue-fg">,</span> inputs<span class="ansi-blue-fg">=</span>inputs<span class="ansi-blue-fg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    246</span> 
+<span class="ansi-green-intense-fg ansi-bold">    247</span>     <span class="ansi-green-fg">def</span> register_hook<span class="ansi-blue-fg">(</span>self<span class="ansi-blue-fg">,</span> hook<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span>
+
+<span class="ansi-green-fg">/usr/local/lib/python3.7/dist-packages/torch/autograd/__init__.py</span> in <span class="ansi-cyan-fg">backward</span><span class="ansi-blue-fg">(tensors, grad_tensors, retain_graph, create_graph, grad_variables, inputs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    145</span>     Variable._execution_engine.run_backward(
+<span class="ansi-green-intense-fg ansi-bold">    146</span>         tensors<span class="ansi-blue-fg">,</span> grad_tensors_<span class="ansi-blue-fg">,</span> retain_graph<span class="ansi-blue-fg">,</span> create_graph<span class="ansi-blue-fg">,</span> inputs<span class="ansi-blue-fg">,</span>
+<span class="ansi-green-fg">--&gt; 147</span><span class="ansi-red-fg">         allow_unreachable=True, accumulate_grad=True)  # allow_unreachable flag
+</span><span class="ansi-green-intense-fg ansi-bold">    148</span> 
+<span class="ansi-green-intense-fg ansi-bold">    149</span> 
+
+<span class="ansi-red-fg">KeyboardInterrupt</span>: </pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+<script type="application/vnd.jupyter.widget-state+json">
+{"6f0a94d343c143f4a6076678c32615da": {"model_module": "@jupyter-widgets/controls", "model_name": "HBoxModel", "state": {"_view_name": "HBoxView", "_dom_classes": [], "_model_name": "HBoxModel", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.5.0", "box_style": "", "layout": "IPY_MODEL_9566579ac82b48b2bd897b22a18f0908", "_model_module": "@jupyter-widgets/controls", "children": ["IPY_MODEL_09ad90621dd74b64917e65b99e8daed2", "IPY_MODEL_3129bf9f02d8453cb36ff0d8c6764a04"]}}, "9566579ac82b48b2bd897b22a18f0908": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "09ad90621dd74b64917e65b99e8daed2": {"model_module": "@jupyter-widgets/controls", "model_name": "FloatProgressModel", "state": {"_view_name": "ProgressView", "style": "IPY_MODEL_a55634d59a0c413a8bd956c595551e6e", "_dom_classes": [], "description": "100%", "_model_name": "FloatProgressModel", "bar_style": "success", "max": 178090079, "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "value": 178090079, "_view_count": null, "_view_module_version": "1.5.0", "orientation": "horizontal", "min": 0, "description_tooltip": null, "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_814c239c768f4e5e932beb6ea35a173b"}}, "3129bf9f02d8453cb36ff0d8c6764a04": {"model_module": "@jupyter-widgets/controls", "model_name": "HTMLModel", "state": {"_view_name": "HTMLView", "style": "IPY_MODEL_6ed10d7dccfb468abe2f02aca7e989da", "_dom_classes": [], "description": "", "_model_name": "HTMLModel", "placeholder": "\u200b", "_view_module": "@jupyter-widgets/controls", "_model_module_version": "1.5.0", "value": " 170M/170M [00:02&lt;00:00, 75.5MB/s]", "_view_count": null, "_view_module_version": "1.5.0", "description_tooltip": null, "_model_module": "@jupyter-widgets/controls", "layout": "IPY_MODEL_405008bf2d354b8da77a92135122120b"}}, "a55634d59a0c413a8bd956c595551e6e": {"model_module": "@jupyter-widgets/controls", "model_name": "ProgressStyleModel", "state": {"_view_name": "StyleView", "_model_name": "ProgressStyleModel", "description_width": "initial", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.2.0", "bar_color": null, "_model_module": "@jupyter-widgets/controls"}}, "814c239c768f4e5e932beb6ea35a173b": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}, "6ed10d7dccfb468abe2f02aca7e989da": {"model_module": "@jupyter-widgets/controls", "model_name": "DescriptionStyleModel", "state": {"_view_name": "StyleView", "_model_name": "DescriptionStyleModel", "description_width": "", "_view_module": "@jupyter-widgets/base", "_model_module_version": "1.5.0", "_view_count": null, "_view_module_version": "1.2.0", "_model_module": "@jupyter-widgets/controls"}}, "405008bf2d354b8da77a92135122120b": {"model_module": "@jupyter-widgets/base", "model_name": "LayoutModel", "state": {"_view_name": "LayoutView", "grid_template_rows": null, "right": null, "justify_content": null, "_view_module": "@jupyter-widgets/base", "overflow": null, "_model_module_version": "1.2.0", "_view_count": null, "flex_flow": null, "width": null, "min_width": null, "border": null, "align_items": null, "bottom": null, "_model_module": "@jupyter-widgets/base", "top": null, "grid_column": null, "overflow_y": null, "overflow_x": null, "grid_auto_flow": null, "grid_area": null, "grid_template_columns": null, "flex": null, "_model_name": "LayoutModel", "justify_items": null, "grid_row": null, "max_height": null, "align_content": null, "visibility": null, "align_self": null, "height": null, "min_height": null, "padding": null, "grid_auto_rows": null, "grid_gap": null, "max_width": null, "order": null, "_view_module_version": "1.2.0", "grid_template_areas": null, "object_position": null, "object_fit": null, "grid_auto_columns": null, "margin": null, "display": null, "left": null}}}
+</script>
+
+
+
+  </div><a class="u-url" href="/sample-ds-blog-anders/2021/05/09/Pedestrian_detector.html" hidden></a>
+</article>
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/sample-ds-blog-anders/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/sample-ds-blog-anders/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/sample-ds-blog-anders/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>An easy to use blogging platform with support for Jupyter Notebooks.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/fastai" title="fastai"><svg class="svg-icon grey"><use xlink:href="/sample-ds-blog-anders/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/fastdotai" title="fastdotai"><svg class="svg-icon grey"><use xlink:href="/sample-ds-blog-anders/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
